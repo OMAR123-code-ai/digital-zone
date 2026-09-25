@@ -1,42 +1,29 @@
 # DBS — Digital Business Store
 
-Boutique e-commerce premium (frontend) adaptée au marché africain et international.
+Boutique e-commerce premium (frontend React) — identité **noir / or / argent** d'après le logo officiel.
 
-## Identité visuelle
+## Design system (logo)
 
-- **Noir premium** : `#050505`
-- **Or DBS** : `#D4AF37`
-- **Or lumineux** : `#FFD700`
-- Style : luxe + tech (Apple Store × Shopify × Tesla)
-
-## Stack
-
-- React 19 + TypeScript
-- Vite 6
-- Tailwind CSS 4
-- Framer Motion
-- Zustand (panier, wallet, user)
-- React Router 7
-- Lucide React
+- Noir dominant : `#0a0a0a` / cartes `#1a1a1a` (pas tout en noir plat)
+- Or : `#D4AF37` → `#F5D76E`
+- Argent : `#C0C0C0` → `#E8E8E8`
+- Slogan : *L'innovation au service de votre quotidien*
 
 ## Fonctionnalités
 
-- ✅ Page d'accueil premium (hero, catégories, best-sellers)
-- ✅ Catalogue avec filtres & tri
-- ✅ Fiche produit détaillée
-- ✅ Panier fonctionnel + codes promo
-- ✅ Checkout multi-étapes
-- ✅ Paiements : Orange Money, Moov Money, Wave, Carte, **DBS Coin**
-- ✅ Portefeuille DBS Coin (monnaie virtuelle)
-- ✅ Confirmation + suivi de commande
-- ✅ Compte client (commandes, favoris, wallet)
-- ✅ Contact, FAQ, À propos
-- ✅ Bouton WhatsApp flottant
-- ✅ Architecture prête pour Google Apps Script + Sheets
+- Header : devise (FCFA/USD) + langue (FR/EN)
+- Catalogue, fiche produit, panier, checkout
+- **Produit introuvable ?** — formulaire de demande de sourcing
+- Newsletter (bonus DBS Coin)
+- WhatsApp flottant → **+226 73 19 07 10**
+- Compte client, suivi commande, FAQ, contact
+- Prêt pour Google Apps Script / Sheets
 
-## Démarrage
+## Lancer
 
 ```bash
+git clone https://github.com/OMAR123-code-ai/digital-zone.git
+cd digital-zone
 npm install
 npm run dev
 ```
@@ -48,12 +35,9 @@ Ouvrir http://localhost:5173
 - `DBS2024` → -10 000 FCFA
 - `BIENVENUE` → -5 000 FCFA
 
-## Prochaine phase (backend)
+## Stack
 
-1. Déployer Google Apps Script Web App
-2. Connecter `VITE_APPS_SCRIPT_URL`
-3. Dashboard admin
-4. Gestion produits / commandes / notifications
+React 19 · TypeScript · Vite · Tailwind 4 · Zustand · Framer Motion · React Router
 
 ---
 
