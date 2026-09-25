@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { Smartphone, Shirt, Watch, Home, Sparkles, Dumbbell, Cpu, Tag, ArrowRight, Truck, Shield, Headphones, Award } from 'lucide-react'
 import { ProductCard } from '../components/ProductCard'
 import { Newsletter } from '../components/Newsletter'
 import { ProductRequest } from '../components/ProductRequest'
+import { ProductCompare } from '../components/ProductCompare'
+import { HeroBanner } from '../components/HeroBanner'
 import { products } from '../data/products'
 
 const categoryIcons = [
@@ -22,55 +23,8 @@ export function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-dbs-black via-dbs-dark to-dbs-black" />
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-dbs-gold/15 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-dbs-gold/10 rounded-full blur-3xl" />
-        </div>
+      <HeroBanner />
 
-        <div className="relative max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-block px-3 py-1 rounded-full border border-dbs-gold/40 text-dbs-gold text-xs font-medium mb-4">
-              Nouveauté 2026
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
-              La technologie<br />
-              <span className="gold-text">à la perfection</span>
-            </h1>
-            <p className="mt-4 text-dbs-silver text-lg max-w-md">
-              L'innovation au service de votre quotidien. Mode, high-tech, beauté et plus encore.
-            </p>
-            <Link
-              to="/boutique"
-              className="inline-flex items-center gap-2 mt-8 px-8 py-3.5 rounded-full gold-gradient text-dbs-black font-bold text-base hover:shadow-lg hover:shadow-dbs-gold/30 transition"
-            >
-              Découvrir maintenant <ArrowRight size={18} />
-            </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative hidden md:block"
-          >
-            <div className="grid grid-cols-2 gap-4">
-              {featured.slice(0, 4).map((p, i) => (
-                <div
-                  key={p.id}
-                  className={`rounded-2xl overflow-hidden border border-dbs-border ${i === 0 ? 'col-span-2 aspect-[2/1]' : 'aspect-square'}`}
-                >
-                  <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover" />
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Categories */}
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-4 sm:grid-cols-8 gap-4">
           {categoryIcons.map((cat) => {
@@ -91,7 +45,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Best sellers */}
       <section className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-white">
@@ -108,7 +61,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Trust */}
       <section className="bg-dbs-dark border-y border-dbs-border py-10">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
@@ -130,7 +82,6 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* All products teaser */}
       <section className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-white">
@@ -147,7 +98,8 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Product not found — like Shopify */}
+      <ProductCompare />
+
       <ProductRequest />
 
       <Newsletter />
