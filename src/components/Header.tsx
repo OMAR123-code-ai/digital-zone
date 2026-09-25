@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Search, User, Heart, ShoppingCart, Menu, X, Phone } from 'lucide-react'
+import { Search, User, Heart, ShoppingCart, Menu, X, Phone, Globe } from 'lucide-react'
 import { Logo } from './Logo'
 import { useCartStore } from '../store/cartStore'
 import { useUserStore } from '../store/userStore'
@@ -9,6 +9,8 @@ import { categories } from '../data/products'
 export function Header() {
   const [mobileMenu, setMobileMenu] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [currency, setCurrency] = useState<'FCFA' | 'USD'>('FCFA')
+  const [lang, setLang] = useState<'FR' | 'EN'>('FR')
   const navigate = useNavigate()
   const itemCount = useCartStore((s) => s.getItemCount())
   const favorites = useUserStore((s) => s.favorites)
@@ -24,17 +26,29 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-dbs-dark border-b border-dbs-border text-xs text-dbs-silver">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-          <span className="flex items-center gap-1.5">
-            <span className="text-dbs-gold">🚚</span> Livraison rapide dans le monde entier
-          </span>
-          <span className="hidden sm:flex items-center gap-1.5">
-            <span className="text-dbs-gold">🔒</span> Paiement sécurisé
-          </span>
-          <span className="hidden md:flex items-center gap-1.5">
-            <span className="text-dbs-gold">💬</span> Service client 24/7
-          </span>
+      {/* Top promo + currency / language */}
+      <div className="bg-dbs-dark border-b border-dbs-border text-xs">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-dbs-gold text-center flex-1 min-w-0 truncate sm:whitespace-normal">
+            Passionné(e) de bonnes affaires ? En gros ou en détail — DBS est là pour vous servir.
+          </p>
+          <div className="flex items-center gap-3 text-dbs-silver shrink-0">
+            <button
+              type="button"
+              onClick={() => setCurrency(currency === 'FCFA' ? 'USD' : 'FCFA')}
+              className="hover:text-dbs-gold transition"
+            >
+              {currency}
+            </button>
+            <span className="text-dbs-border">|</span>
+            <button
+              type="button"
+              onClick={() => setLang(lang === 'FR' ? 'EN' : 'FR')}
+              className="flex items-center gap-1 hover:text-dbs-gold transition"
+            >
+              <Globe size={12} /> {lang}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -57,7 +71,7 @@ export function Header() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Rechercher un produit, une marque, une catégorie..."
-                className="w-full bg-dbs-card border border-dbs-border rounded-full py-2.5 pl-4 pr-12 text-sm text-white placeholder:text-dbs-silver/60 focus:border-dbs-gold outline-none transition"
+                className="w-full bg-dbs-card border border-dbs-border rounded-full py-2.5 pl-4 pr-12 text-sm text-white placeholder:text-dbs-muted focus:border-dbs-gold outline-none transition"
               />
               <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-dbs-gold">
                 <Search size={18} />
@@ -127,7 +141,7 @@ export function Header() {
               </li>
             ))}
             <li>
-              <a href="https://wa.me/22677177636" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2.5 text-green-400 hover:bg-dbs-card rounded-md">
+              <a href="https://wa.me/22673190710" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2.5 text-green-400 hover:bg-dbs-card rounded-md">
                 <Phone size={16} /> WhatsApp Support
               </a>
             </li>
