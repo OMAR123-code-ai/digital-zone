@@ -5,6 +5,9 @@ import { Newsletter } from '../components/Newsletter'
 import { ProductRequest } from '../components/ProductRequest'
 import { ProductCompare } from '../components/ProductCompare'
 import { HeroBanner } from '../components/HeroBanner'
+import { HomeFAQ } from '../components/HomeFAQ'
+import { Testimonials } from '../components/Testimonials'
+import { WhyUs } from '../components/WhyUs'
 import { products } from '../data/products'
 
 const categoryIcons = [
@@ -44,6 +47,8 @@ export function HomePage() {
           })}
         </div>
       </section>
+
+      <WhyUs />
 
       <section className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-8">
@@ -101,6 +106,10 @@ export function HomePage() {
       <ProductCompare />
 
       <ProductRequest />
+
+      <Testimonials />
+
+      <HomeFAQ />
 
       <Newsletter />
     </div>

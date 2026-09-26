@@ -3,44 +3,71 @@ import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+/**
+ * Bannières = images placées par toi dans public/ :
+ *   banniere-1.jpg | banniere-2.jpg | banniere-3.jpg
+ * (PNG accepté aussi : banniere-1.png etc. via fallback)
+ *
+ * Textes légers uniquement — le visuel vient de TES images.
+ */
 const slides = [
   {
     id: 1,
+    images: ['/banniere-1.jpg', '/banniere-1.png', '/banniere-1.webp'],
     badge: 'Nouveauté 2026',
-    title: 'La technologie',
-    highlight: 'à la perfection',
-    subtitle: "L'innovation au service de votre quotidien. Découvrez notre sélection premium.",
-    cta: 'Découvrir maintenant',
+    title: 'DBS Digital Business Store',
+    highlight: 'Votre partenaire de confiance',
+    subtitle: 'En gros ou en détail — partout dans le monde.',
+    cta: 'Découvrir la boutique',
     href: '/boutique',
-    image: 'https://images.unsplash.com/photo-1695048133142-1a204db4a1d6?w=1200&q=80',
   },
   {
     id: 2,
-    badge: 'High-Tech',
-    title: 'Audio & wearables',
-    highlight: 'premium',
-    subtitle: 'AirPods, montres connectées et accessoires sélectionnés pour la qualité.',
-    cta: 'Voir le catalogue',
-    href: '/boutique?categorie=high-tech',
-    image: 'https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=1200&q=80',
-  },
-  {
-    id: 3,
+    images: ['/banniere-2.jpg', '/banniere-2.png', '/banniere-2.webp'],
     badge: 'Offres',
     title: 'Des produits de qualité',
     highlight: 'pour un quotidien meilleur',
-    subtitle: 'Mode, beauté, électronique — en gros ou en détail, partout dans le monde.',
-    cta: 'Acheter maintenant',
+    subtitle: 'High-tech, mode, accessoires — sélectionnés pour vous.',
+    cta: 'Voir le catalogue',
     href: '/boutique',
-    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=80',
+  },
+  {
+    id: 3,
+    images: ['/banniere-3.jpg', '/banniere-3.png', '/banniere-3.webp'],
+    badge: 'Service',
+    title: "L'innovation au service",
+    highlight: 'de votre quotidien',
+    subtitle: 'Livraison rapide · Paiement sécurisé · Support WhatsApp.',
+    cta: 'Nous contacter',
+    href: '/contact',
   },
 ]
+
+function BannerImage({ candidates, alt }: { candidates: string[]; alt: string }) {
+  const [i, setI] = useState(0)
+  if (i >= candidates.length) {
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-dbs-black via-dbs-dark to-dbs-black">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dbs-gold/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-dbs-gold/5 rounded-full blur-3xl" />
+      </div>
+    )
+  }
+  return (
+    <img
+      src={candidates[i]}
+      alt={alt}
+      className="absolute inset-0 w-full h-full object-cover"
+      onError={() => setI((x) => x + 1)}
+    />
+  )
+}
 
 export function HeroBanner() {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6000)
+    const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 7000)
     return () => clearInterval(t)
   }, [])
 
@@ -49,22 +76,22 @@ export function HeroBanner() {
   const next = () => setIndex((i) => (i + 1) % slides.length)
 
   return (
-    <section className="relative overflow-hidden min-h-[420px] md:min-h-[520px]">
+    <section className="relative overflow-hidden min-h-[380px] sm:min-h-[460px] md:min-h-[540px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={slide.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.55 }}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-dbs-black via-dbs-black/90 to-dbs-black/40 z-10" />
-          <img src={slide.image} alt="" className="w-full h-full object-cover opacity-50" />
+          <BannerImage candidates={slide.images} alt={slide.title} />
+          <div className="absolute inset-0 bg-gradient-to-r from-dbs-black/90 via-dbs-black/70 to-dbs-black/40 z-10" />
         </motion.div>
       </AnimatePresence>
 
-      <div className="relative z-20 max-w-7xl mx-auto px-4 py-16 md:py-24 flex items-center min-h-[420px] md:min-h-[520px]">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 py-14 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[540px]">
         <div className="max-w-xl">
           <span className="inline-block px-3 py-1 rounded-full border border-dbs-gold/50 bg-dbs-gold/10 text-dbs-gold text-xs font-medium mb-4">
             {slide.badge}
@@ -87,7 +114,7 @@ export function HeroBanner() {
         type="button"
         onClick={prev}
         className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-dbs-border bg-dbs-black/60 text-dbs-silver hover:text-dbs-gold hover:border-dbs-gold flex items-center justify-center transition"
-        aria-label="Précédent"
+        aria-label="Bannière précédente"
       >
         <ChevronLeft size={20} />
       </button>
@@ -95,7 +122,7 @@ export function HeroBanner() {
         type="button"
         onClick={next}
         className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-dbs-border bg-dbs-black/60 text-dbs-silver hover:text-dbs-gold hover:border-dbs-gold flex items-center justify-center transition"
-        aria-label="Suivant"
+        aria-label="Bannière suivante"
       >
         <ChevronRight size={20} />
       </button>
@@ -107,7 +134,7 @@ export function HeroBanner() {
             type="button"
             onClick={() => setIndex(i)}
             className={`h-1.5 rounded-full transition-all ${i === index ? 'w-8 bg-dbs-gold' : 'w-1.5 bg-dbs-silver/40'}`}
-            aria-label={`Slide ${i + 1}`}
+            aria-label={`Bannière ${i + 1}`}
           />
         ))}
       </div>
