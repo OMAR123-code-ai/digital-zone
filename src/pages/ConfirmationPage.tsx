@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { CheckCircle, Download, Package } from 'lucide-react'
+import { CheckCircle, Download, Package, ArrowLeft } from 'lucide-react'
 import { useUserStore } from '../store/userStore'
 import { formatPrice, formatDate } from '../utils/format'
 
@@ -32,11 +32,11 @@ export function ConfirmationPage() {
         <Link to={`/tracking?order=${orderNumber}`} className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-dbs-gold text-dbs-gold font-semibold hover:bg-dbs-gold hover:text-dbs-black transition">
           <Package size={18} /> Voir ma commande
         </Link>
-        <button onClick={() => window.print()} className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl gold-gradient text-dbs-black font-bold">
-          <Download size={18} /> Télécharger reçu
-        </button>
+        <Link to={`/recu/${orderNumber}`} className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl gold-gradient text-dbs-black font-bold">
+          <Download size={18} /> Voir mon reçu
+        </Link>
       </div>
-      <Link to="/" className="block mt-8 text-sm text-dbs-silver hover:text-dbs-gold">← Retour à l'accueil</Link>
+      <Link to="/" className="flex items-center justify-center gap-2 mt-8 text-sm text-dbs-silver hover:text-dbs-gold"><ArrowLeft size={14} /> Retour à l'accueil</Link>
     </div>
   )
 }

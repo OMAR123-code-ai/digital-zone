@@ -1,34 +1,35 @@
 # DBS — Digital Business Store
 
-Boutique e-commerce premium (frontend React) — identité **noir / or / argent** d'après le logo officiel.
+Boutique e-commerce premium (frontend React) — identité **noir / or / argent**.
 
-## Design system (logo)
+## Nouveautés (v1.1)
 
-- Noir dominant : `#0a0a0a` / cartes `#1a1a1a` (pas tout en noir plat)
-- Or : `#D4AF37` → `#F5D76E`
-- Argent : `#C0C0C0` → `#E8E8E8`
-- Slogan : *L'innovation au service de votre quotidien*
-
-## Fonctionnalités
-
-- Header : devise (FCFA/USD) + langue (FR/EN)
-- Catalogue, fiche produit, panier, checkout
-- **Produit introuvable ?** — formulaire de demande de sourcing
-- Newsletter (bonus DBS Coin)
-- WhatsApp flottant → **+226 73 19 07 10**
-- Compte client, suivi commande, FAQ, contact
-- Prêt pour Google Apps Script / Sheets
+- **Reçu de commande** `/recu/:orderNumber` avec QR code de vérification
+- Lib `qrcode` (génération locale)
+- Logo : `public/logo-dbs.svg` (et optionnel `public/logo-dbs.png`)
+- WhatsApp : **+226 73 19 07 10**
 
 ## Lancer
 
 ```bash
 git clone https://github.com/OMAR123-code-ai/digital-zone.git
 cd digital-zone
+git pull
 npm install
 npm run dev
 ```
 
 Ouvrir http://localhost:5173
+
+## Logo PNG officiel (optionnel)
+
+Place ton fichier dans :
+
+```
+public/logo-dbs.png
+```
+
+Sinon le site utilise automatiquement `logo-dbs.svg`.
 
 ## Codes promo démo
 
@@ -37,8 +38,6 @@ Ouvrir http://localhost:5173
 
 ## Stack
 
-React 19 · TypeScript · Vite · Tailwind 4 · Zustand · Framer Motion · React Router
-
----
+React 19 · TypeScript · Vite · Tailwind 4 · Zustand · Framer Motion · qrcode
 
 © 2026 DBS Digital Business Store

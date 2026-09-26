@@ -6,6 +6,7 @@ import { ProductPage } from './pages/ProductPage'
 import { CartPage } from './pages/CartPage'
 import { CheckoutPage } from './pages/CheckoutPage'
 import { ConfirmationPage } from './pages/ConfirmationPage'
+import { ReceiptPage } from './pages/ReceiptPage'
 import { TrackingPage } from './pages/TrackingPage'
 import { AccountPage } from './pages/AccountPage'
 import { ContactPage } from './pages/ContactPage'
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="panier" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="confirmation/:orderNumber" element={<ConfirmationPage />} />
+          <Route path="recu/:orderNumber" element={<ReceiptPage />} />
           <Route path="tracking" element={<TrackingPage />} />
           <Route path="compte" element={<AccountPage />} />
           <Route path="contact" element={<ContactPage />} />

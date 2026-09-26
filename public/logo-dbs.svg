@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8962E"/>
+      <stop offset="45%" stop-color="#F5D76E"/>
+      <stop offset="100%" stop-color="#D4AF37"/>
+    </linearGradient>
+    <linearGradient id="s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A0A0A0"/>
+      <stop offset="50%" stop-color="#E8E8E8"/>
+      <stop offset="100%" stop-color="#C0C0C0"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="#0a0a0a"/>
+  <path d="M30 145 A70 70 0 1 1 170 145" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+  <rect x="72" y="78" width="16" height="48" rx="2" fill="url(#g)"/>
+  <rect x="92" y="58" width="16" height="68" rx="2" fill="url(#g)"/>
+  <rect x="112" y="68" width="16" height="58" rx="2" fill="url(#g)"/>
+  <text x="100" y="165" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="bold">
+    <tspan fill="url(#g)">DB</tspan><tspan fill="url(#s)">S</tspan>
+  </text>
+</svg>

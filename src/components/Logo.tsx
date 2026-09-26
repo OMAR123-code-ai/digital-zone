@@ -8,24 +8,26 @@ interface LogoProps {
 }
 
 export function Logo({ size = 'md', showText = true, className = '' }: LogoProps) {
-  const [imgError, setImgError] = useState(false)
+  const [srcIndex, setSrcIndex] = useState(0)
+  const sources = ['/logo-dbs.png', '/logo-dbs.svg']
   const sizes = {
     sm: { icon: 36, text: 'text-sm' },
     md: { icon: 48, text: 'text-base' },
     lg: { icon: 72, text: 'text-xl' },
   }
   const s = sizes[size]
+  const showImg = srcIndex < sources.length
 
   return (
     <Link to="/" className={`flex items-center gap-2.5 group ${className}`}>
-      {!imgError ? (
+      {showImg ? (
         <img
-          src="/logo-dbs.png"
+          src={sources[srcIndex]}
           alt="DBS Digital Business Store"
           width={s.icon}
           height={s.icon}
           className="object-contain shrink-0 drop-shadow-[0_0_10px_rgba(212,175,55,0.35)]"
-          onError={() => setImgError(true)}
+          onError={() => setSrcIndex((i) => i + 1)}
         />
       ) : (
         <div className="relative flex items-center justify-center shrink-0" style={{ width: s.icon, height: s.icon }}>
