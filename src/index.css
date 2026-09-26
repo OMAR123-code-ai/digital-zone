@@ -25,6 +25,8 @@ body {
   background-color: var(--color-dbs-black);
   color: var(--color-dbs-white);
   -webkit-font-smoothing: antialiased;
+  /* Empêche le zoom iOS trop agressif sur les inputs < 16px */
+  -webkit-text-size-adjust: 100%;
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -37,6 +39,27 @@ body {
 :focus-visible {
   outline: 2px solid #D4AF37;
   outline-offset: 2px;
+}
+
+/* Cible tactile min. ~44px (WCAG / Apple HIG) */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: #D4AF37;
+  color: #0a0a0a;
+  font-weight: 700;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+  left: 0;
 }
 
 .gold-gradient {
@@ -87,4 +110,11 @@ img { background-color: #1a1a1a; }
 
 button:active:not(:disabled) {
   transform: scale(0.98);
+}
+
+/* Inputs ≥ 16px pour éviter zoom auto iOS */
+@media (max-width: 640px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
 }

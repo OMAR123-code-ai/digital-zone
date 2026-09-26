@@ -10,7 +10,7 @@ export function MainLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-dbs-black pb-14 lg:pb-0">
       <Header />
-      <main className="flex-1 w-full overflow-x-hidden">
+      <main id="main-content" className="flex-1 w-full overflow-x-hidden" tabIndex={-1}>
         <ErrorBoundary>
           <Outlet />
         </ErrorBoundary>
