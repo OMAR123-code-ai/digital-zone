@@ -8,9 +8,9 @@ import { ErrorBoundary } from '../components/ErrorBoundary'
 
 export function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-dbs-black pb-16 lg:pb-0">
+    <div className="min-h-screen flex flex-col bg-dbs-black pb-14 lg:pb-0">
       <Header />
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         <ErrorBoundary>
           <Outlet />
         </ErrorBoundary>
