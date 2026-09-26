@@ -1,17 +1,17 @@
-FICHIERS A PLACER DANS CE DOSSIER (public/)
-============================================
+FICHIERS A PLACER DANS public/
+==============================
 
-LOGO
-  logo-dbs.png     (recommandé, carré, fond transparent ou noir)
-  logo-dbs.svg    (déjà fourni en secours)
+Noms EXACTS (respecter minuscules et extensions) :
 
-BANNIERES ACCUEIL (images larges, idéalement 1920x800 ou plus)
-  banniere-1.jpg  (ou .png / .webp)
-  banniere-2.jpg
-  banniere-3.jpg
+  logo-dbs.png        → logo officiel DBS
+  banniere-1.jpg      → Mode / Accessoires / Lifestyle
+  banniere-2.jpg      → Smartphones / Ordinateurs / High-tech
+  banniere-3.jpg      → Maison connectée
+  whatsapp-icon.png   → icône bouton WhatsApp (optionnel)
 
-WHATSAPP (optionnel)
-  whatsapp-icon.png   (carré 64x64 ou 128x128)
+Après avoir copié les fichiers :
+  1. npm run dev
+  2. Ctrl+F5 dans le navigateur
 
-Noms EXACTS obligatoires pour que le site les reconnaisse.
-Après ajout : relancer npm run dev et Ctrl+F5 dans le navigateur.
+Les bannières défilent automatiquement et sont cliquables
+(vers les catégories mode, électronique, maison).

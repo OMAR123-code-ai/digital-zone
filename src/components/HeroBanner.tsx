@@ -1,45 +1,35 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 /**
- * Bannières = images placées par toi dans public/ :
- *   banniere-1.jpg | banniere-2.jpg | banniere-3.jpg
- * (PNG accepté aussi : banniere-1.png etc. via fallback)
+ * Bannières officielles DBS — place dans public/ :
+ *   banniere-1.jpg  → Mode / Accessoires / Lifestyle
+ *   banniere-2.jpg  → Smartphones / Ordinateurs / High-tech
+ *   banniere-3.jpg  → Maison connectée
  *
- * Textes légers uniquement — le visuel vient de TES images.
+ * Les images contiennent déjà logo + textes + CTA.
+ * On affiche l'image en plein largeur ; toute la bannière est cliquable.
  */
 const slides = [
   {
     id: 1,
     images: ['/banniere-1.jpg', '/banniere-1.png', '/banniere-1.webp'],
-    badge: 'Nouveauté 2026',
-    title: 'DBS Digital Business Store',
-    highlight: 'Votre partenaire de confiance',
-    subtitle: 'En gros ou en détail — partout dans le monde.',
-    cta: 'Découvrir la boutique',
-    href: '/boutique',
+    href: '/boutique?categorie=mode',
+    label: 'Mode · Accessoires · Lifestyle',
   },
   {
     id: 2,
     images: ['/banniere-2.jpg', '/banniere-2.png', '/banniere-2.webp'],
-    badge: 'Offres',
-    title: 'Des produits de qualité',
-    highlight: 'pour un quotidien meilleur',
-    subtitle: 'High-tech, mode, accessoires — sélectionnés pour vous.',
-    cta: 'Voir le catalogue',
-    href: '/boutique',
+    href: '/boutique?categorie=electronique',
+    label: 'Smartphones · Ordinateurs · High-tech',
   },
   {
     id: 3,
     images: ['/banniere-3.jpg', '/banniere-3.png', '/banniere-3.webp'],
-    badge: 'Service',
-    title: "L'innovation au service",
-    highlight: 'de votre quotidien',
-    subtitle: 'Livraison rapide · Paiement sécurisé · Support WhatsApp.',
-    cta: 'Nous contacter',
-    href: '/contact',
+    href: '/boutique?categorie=maison',
+    label: 'Maison connectée · Gadgets',
   },
 ]
 
@@ -47,9 +37,12 @@ function BannerImage({ candidates, alt }: { candidates: string[]; alt: string })
   const [i, setI] = useState(0)
   if (i >= candidates.length) {
     return (
-      <div className="absolute inset-0 bg-gradient-to-br from-dbs-black via-dbs-dark to-dbs-black">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-dbs-gold/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-dbs-gold/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-dbs-black via-dbs-dark to-dbs-black flex items-center justify-center">
+        <p className="text-dbs-silver text-sm px-4 text-center">
+          Ajoutez <code className="text-dbs-gold">banniere-1.jpg</code>,{' '}
+          <code className="text-dbs-gold">banniere-2.jpg</code>,{' '}
+          <code className="text-dbs-gold">banniere-3.jpg</code> dans le dossier public/
+        </p>
       </div>
     )
   }
@@ -57,7 +50,7 @@ function BannerImage({ candidates, alt }: { candidates: string[]; alt: string })
     <img
       src={candidates[i]}
       alt={alt}
-      className="absolute inset-0 w-full h-full object-cover"
+      className="absolute inset-0 w-full h-full object-cover object-center"
       onError={() => setI((x) => x + 1)}
     />
   )
@@ -67,7 +60,7 @@ export function HeroBanner() {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 7000)
+    const t = setInterval(() => setIndex((i) => (i + 1) % slides.length), 6500)
     return () => clearInterval(t)
   }, [])
 
@@ -76,44 +69,27 @@ export function HeroBanner() {
   const next = () => setIndex((i) => (i + 1) % slides.length)
 
   return (
-    <section className="relative overflow-hidden min-h-[380px] sm:min-h-[460px] md:min-h-[540px]">
+    <section className="relative overflow-hidden w-full aspect-[21/9] min-h-[280px] max-h-[560px] bg-dbs-black">
       <AnimatePresence mode="wait">
         <motion.div
           key={slide.id}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.55 }}
+          transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
-          <BannerImage candidates={slide.images} alt={slide.title} />
-          <div className="absolute inset-0 bg-gradient-to-r from-dbs-black/90 via-dbs-black/70 to-dbs-black/40 z-10" />
+          <Link to={slide.href} className="block absolute inset-0 z-10" aria-label={slide.label}>
+            <span className="sr-only">{slide.label}</span>
+          </Link>
+          <BannerImage candidates={slide.images} alt={slide.label} />
         </motion.div>
       </AnimatePresence>
-
-      <div className="relative z-20 max-w-7xl mx-auto px-4 py-14 md:py-20 flex items-center min-h-[380px] sm:min-h-[460px] md:min-h-[540px]">
-        <div className="max-w-xl">
-          <span className="inline-block px-3 py-1 rounded-full border border-dbs-gold/50 bg-dbs-gold/10 text-dbs-gold text-xs font-medium mb-4">
-            {slide.badge}
-          </span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-white">
-            {slide.title}<br />
-            <span className="gold-text">{slide.highlight}</span>
-          </h1>
-          <p className="mt-4 text-dbs-silver text-base md:text-lg">{slide.subtitle}</p>
-          <Link
-            to={slide.href}
-            className="inline-flex items-center gap-2 mt-8 px-8 py-3.5 rounded-full gold-gradient text-dbs-black font-bold text-base hover:shadow-lg hover:shadow-dbs-gold/30 transition"
-          >
-            {slide.cta} <ArrowRight size={18} />
-          </Link>
-        </div>
-      </div>
 
       <button
         type="button"
         onClick={prev}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-dbs-border bg-dbs-black/60 text-dbs-silver hover:text-dbs-gold hover:border-dbs-gold flex items-center justify-center transition"
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-white/20 bg-black/50 text-white hover:border-dbs-gold hover:text-dbs-gold flex items-center justify-center transition"
         aria-label="Bannière précédente"
       >
         <ChevronLeft size={20} />
@@ -121,19 +97,19 @@ export function HeroBanner() {
       <button
         type="button"
         onClick={next}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-dbs-border bg-dbs-black/60 text-dbs-silver hover:text-dbs-gold hover:border-dbs-gold flex items-center justify-center transition"
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full border border-white/20 bg-black/50 text-white hover:border-dbs-gold hover:text-dbs-gold flex items-center justify-center transition"
         aria-label="Bannière suivante"
       >
         <ChevronRight size={20} />
       </button>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
         {slides.map((s, i) => (
           <button
             key={s.id}
             type="button"
             onClick={() => setIndex(i)}
-            className={`h-1.5 rounded-full transition-all ${i === index ? 'w-8 bg-dbs-gold' : 'w-1.5 bg-dbs-silver/40'}`}
+            className={`h-1.5 rounded-full transition-all ${i === index ? 'w-8 bg-dbs-gold' : 'w-1.5 bg-white/40'}`}
             aria-label={`Bannière ${i + 1}`}
           />
         ))}
