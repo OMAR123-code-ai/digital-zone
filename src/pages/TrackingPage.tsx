@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router-dom'
 import { Search, Check, Circle } from 'lucide-react'
 import { useUserStore } from '../store/userStore'
 import { formatDate } from '../utils/format'
+import type { TrackingStep } from '../types'
 
-const defaultSteps = [
+const defaultSteps: TrackingStep[] = [
   { status: 'received', label: 'Commande reçue', completed: true },
   { status: 'payment_confirmed', label: 'Paiement confirmé', completed: true },
   { status: 'preparing', label: 'Préparation en cours', completed: false },
